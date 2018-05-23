@@ -862,14 +862,70 @@ var Test = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Test.__proto__ || Object.getPrototypeOf(Test)).call(this, props));
 
         _this.fetchData = function () {
-            fetch("https://api.github.com/users/MateuszKowalskiCL").then(function (resp) {
-                resp.json().then(function (user) {
-                    console.log(user);
+
+            //  fetch user data
+            fetch("https://api.github.com/users/" + _this.state.userName).then(function (resp) {
+                resp.json().then(function (userData) {
+                    var user = {
+                        userName: userData.name === null ? "data not provided" : userData.name,
+                        email: userData.email === null ? "data not provided" : userData.email,
+                        company: userData.company === null ? "data not provided" : userData.company,
+                        location: userData.location === null ? "data not provided" : userData.location,
+                        bio: userData.bio === null ? "data not provided" : userData.bio
+                    };
+                    _this.setState({
+                        user: user
+                    });
+                });
+            });
+
+            // fetch user repositories
+            fetch("https://api.github.com/users/" + _this.state.userName + "/repos").then(function (resp) {
+                resp.json().then(function (repos) {
+                    repos.sort(function (a, b) {
+                        return b.size - a.size;
+                    });
+                    var sortedRepos = [];
+                    repos.map(function (repo) {
+                        if (sortedRepos.length < 5) {
+                            sortedRepos.push(repo);
+                        }
+                    });
+                    console.log(sortedRepos);
+                    _this.setState({
+                        arrayOfRepos: repos
+                    });
                 });
             });
         };
 
-        _this.state = {};
+        _this.handleButtonState = function () {
+            if (_this.state.userName !== "") {
+                _this.setState({
+                    buttonState: false
+                });
+            } else {
+                _this.setState({
+                    buttonState: true
+                });
+            }
+        };
+
+        _this.handleInputChange = function (event) {
+            var value = event.target.value;
+            _this.setState({
+                userName: value
+            }, function () {
+                _this.handleButtonState();
+            });
+        };
+
+        _this.state = {
+            userName: "",
+            buttonState: true,
+            user: {},
+            arrayOfRepos: []
+        };
         return _this;
     }
 
@@ -882,15 +938,22 @@ var Test = function (_React$Component) {
                 "div",
                 null,
                 _react2.default.createElement(
-                    "p",
-                    null,
-                    "element jest stabilny"
+                    "form",
+                    { action: "" },
+                    _react2.default.createElement(
+                        "label",
+                        null,
+                        "Name"
+                    ),
+                    _react2.default.createElement("input", { type: "text", name: "name", value: this.state.userName, onChange: function onChange(e) {
+                            return _this2.handleInputChange(e);
+                        } })
                 ),
                 _react2.default.createElement(
                     "button",
                     { onClick: function onClick() {
                             return _this2.fetchData();
-                        } },
+                        }, disabled: this.state.buttonState },
                     "fetch data"
                 )
             );

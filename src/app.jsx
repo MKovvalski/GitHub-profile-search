@@ -4,33 +4,101 @@ import Sass from "./scss/main.scss";
 
 const promise = new Promise((resolve, reject) => {});
 
-class Test extends React.Component {
+class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            userName: "",
+            buttonState: true,
+            user: {},
+            arrayOfRepos: []
         }
     }
 
     fetchData = () => {
-      fetch("https://api.github.com/users/MateuszKowalskiCL").then(resp => {
-        resp.json().then( user => {
-               console.log(user);
+
+      //  fetch user data
+      fetch("https://api.github.com/users/" + this.state.userName).then(resp => {
+        resp.json().then( userData => {
+
+                // create object with user data
+                const user = {
+                    userName: userData.name === null ? "data not provided" : userData.name,
+                    email: userData.email === null ? "data not provided" : userData.email,
+                    company: userData.company === null ? "data not provided" : userData.company,
+                    location: userData.location === null ? "data not provided" : userData.location,
+                    bio: userData.bio === null ? "data not provided" : userData.bio,
+                };
+
+                // set user as state to display on website
+                this.setState({
+                    user: user
+                })
             })
+      });
+
+      // fetch user repositories
+      fetch("https://api.github.com/users/" + this.state.userName + "/repos").then(resp => {
+          resp.json().then( repos => {
+
+              // sort repos by their size
+              repos.sort( (a, b) => {
+                  return b.size - a.size
+              });
+
+              // empty array for biggest repos
+              const sortedRepos = [];
+
+              // push six first repos to array
+              repos.map( (repo) => {
+                 if (sortedRepos.length < 6) {
+                     sortedRepos.push(repo);
+                 }
+              });
+
+              // set sortedRepos ad state to display on website
+              this.setState({
+                  arrayOfRepos: sortedRepos
+              });
+          })
       })
+    };
+
+    handleButtonState = () => {
+        if (this.state.userName !== "") {
+            this.setState({
+                buttonState: false
+            })
+        } else {
+            this.setState({
+                buttonState: true
+            })
+        }
+    };
+
+    handleInputChange = (event) => {
+        let value = event.target.value;
+            this.setState({
+            userName: value
+        },  () => {
+                this.handleButtonState();
+            })
     };
 
     render () {
         return <div>
-            <p>element jest stabilny</p>
-            <button onClick = {() => this.fetchData()}>fetch data</button>
+            <form action="">
+                <label>Name</label>
+                <input type="text" name="name" value={this.state.userName} onChange={(e) => this.handleInputChange(e)}/>
+            </form>
+            <button onClick = {() => this.fetchData()} disabled= {this.state.buttonState}>fetch data</button>
         </div>
     }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     ReactDOM.render(
-        <Test/>,
+        <App/>,
         document.getElementById("root")
     )
 });
