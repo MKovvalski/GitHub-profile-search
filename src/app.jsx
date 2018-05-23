@@ -14,7 +14,9 @@ class Test extends React.Component {
 
     fetchData = () => {
       fetch("https://api.github.com/users/MateuszKowalskiCL").then(resp => {
-
+        resp.json().then( user => {
+               console.log(user);
+            })
       })
     };
 
