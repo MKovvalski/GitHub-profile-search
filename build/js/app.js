@@ -843,6 +843,14 @@ var _main = __webpack_require__(25);
 
 var _main2 = _interopRequireDefault(_main);
 
+var _user = __webpack_require__(30);
+
+var _user2 = _interopRequireDefault(_user);
+
+var _repositories = __webpack_require__(31);
+
+var _repositories2 = _interopRequireDefault(_repositories);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -851,28 +859,36 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+//imports
+
+
 var promise = new Promise(function (resolve, reject) {});
 
-var Test = function (_React$Component) {
-    _inherits(Test, _React$Component);
+var App = function (_React$Component) {
+    _inherits(App, _React$Component);
 
-    function Test(props) {
-        _classCallCheck(this, Test);
+    function App(props) {
+        _classCallCheck(this, App);
 
-        var _this = _possibleConstructorReturn(this, (Test.__proto__ || Object.getPrototypeOf(Test)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
         _this.fetchData = function () {
 
             //  fetch user data
             fetch("https://api.github.com/users/" + _this.state.userName).then(function (resp) {
                 resp.json().then(function (userData) {
+
+                    // create object with user data
                     var user = {
                         userName: userData.name === null ? "data not provided" : userData.name,
+                        avatar: userData.avatar_url === null ? "data not provided" : userData.avatar_url,
                         email: userData.email === null ? "data not provided" : userData.email,
                         company: userData.company === null ? "data not provided" : userData.company,
                         location: userData.location === null ? "data not provided" : userData.location,
                         bio: userData.bio === null ? "data not provided" : userData.bio
                     };
+
+                    // set user as state to display on website
                     _this.setState({
                         user: user
                     });
@@ -882,18 +898,25 @@ var Test = function (_React$Component) {
             // fetch user repositories
             fetch("https://api.github.com/users/" + _this.state.userName + "/repos").then(function (resp) {
                 resp.json().then(function (repos) {
+
+                    // sort repos by their size
                     repos.sort(function (a, b) {
                         return b.size - a.size;
                     });
+
+                    // empty array for biggest repos
                     var sortedRepos = [];
+
+                    // push six first repos to array
                     repos.map(function (repo) {
-                        if (sortedRepos.length < 5) {
+                        if (sortedRepos.length < 6) {
                             sortedRepos.push(repo);
                         }
                     });
-                    console.log(sortedRepos);
+
+                    // set sortedRepos ad state to display on website
                     _this.setState({
-                        arrayOfRepos: repos
+                        arrayOfRepos: sortedRepos
                     });
                 });
             });
@@ -920,23 +943,39 @@ var Test = function (_React$Component) {
             });
         };
 
+        _this.handleUserDataRender = function () {
+            if (_this.state.user === "") {
+                return null;
+            } else {
+                return _react2.default.createElement(_user2.default, { user: _this.state.user });
+            }
+        };
+
+        _this.handleUserReposRender = function () {
+            if (_this.state.arrayOfRepos === []) {
+                return null;
+            } else {
+                return _react2.default.createElement(_repositories2.default, { repos: _this.state.arrayOfRepos });
+            }
+        };
+
         _this.state = {
             userName: "",
             buttonState: true,
-            user: {},
+            user: "",
             arrayOfRepos: []
         };
         return _this;
     }
 
-    _createClass(Test, [{
+    _createClass(App, [{
         key: "render",
         value: function render() {
             var _this2 = this;
 
             return _react2.default.createElement(
                 "div",
-                null,
+                { className: "container" },
                 _react2.default.createElement(
                     "form",
                     { action: "" },
@@ -955,16 +994,18 @@ var Test = function (_React$Component) {
                             return _this2.fetchData();
                         }, disabled: this.state.buttonState },
                     "fetch data"
-                )
+                ),
+                this.handleUserDataRender(),
+                this.handleUserReposRender()
             );
         }
     }]);
 
-    return Test;
+    return App;
 }(_react2.default.Component);
 
 document.addEventListener("DOMContentLoaded", function () {
-    _reactDom2.default.render(_react2.default.createElement(Test, null), document.getElementById("root"));
+    _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById("root"));
 });
 
 /***/ }),
@@ -20203,6 +20244,172 @@ module.exports = function (css) {
 	return fixedCss;
 };
 
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var User = function (_React$Component) {
+    _inherits(User, _React$Component);
+
+    function User(props) {
+        _classCallCheck(this, User);
+
+        var _this = _possibleConstructorReturn(this, (User.__proto__ || Object.getPrototypeOf(User)).call(this, props));
+
+        _this.state = {};
+        return _this;
+    }
+
+    _createClass(User, [{
+        key: "render",
+        value: function render() {
+            var user = this.props.user;
+            return _react2.default.createElement(
+                "section",
+                { className: "main-user-data" },
+                _react2.default.createElement(
+                    "article",
+                    null,
+                    _react2.default.createElement("img", { src: user.avatar, alt: "user-avatar" }),
+                    _react2.default.createElement(
+                        "div",
+                        { className: "user-data" },
+                        _react2.default.createElement(
+                            "h2",
+                            null,
+                            user.userName
+                        ),
+                        _react2.default.createElement(
+                            "span",
+                            null,
+                            user.email
+                        ),
+                        _react2.default.createElement(
+                            "span",
+                            null,
+                            user.company
+                        ),
+                        _react2.default.createElement(
+                            "p",
+                            null,
+                            user.bio
+                        ),
+                        _react2.default.createElement(
+                            "span",
+                            null,
+                            user.location
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return User;
+}(_react2.default.Component);
+
+exports.default = User;
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Repositories = function (_React$Component) {
+    _inherits(Repositories, _React$Component);
+
+    function Repositories(props) {
+        _classCallCheck(this, Repositories);
+
+        var _this = _possibleConstructorReturn(this, (Repositories.__proto__ || Object.getPrototypeOf(Repositories)).call(this, props));
+
+        _this.handleRepositoriesRender = function () {
+            return _this.props.repos.map(function (repo, index) {
+                return _react2.default.createElement(
+                    "li",
+                    { key: index },
+                    _react2.default.createElement(
+                        "h2",
+                        null,
+                        " Name: ",
+                        repo.name
+                    ),
+                    _react2.default.createElement(
+                        "p",
+                        null,
+                        "Description: ",
+                        repo.description
+                    )
+                );
+            });
+        };
+
+        _this.state = {};
+        return _this;
+    }
+
+    _createClass(Repositories, [{
+        key: "render",
+        value: function render() {
+            console.log(this.handleRepositoriesRender());
+            return _react2.default.createElement(
+                "section",
+                null,
+                _react2.default.createElement(
+                    "ul",
+                    null,
+                    this.handleRepositoriesRender()
+                )
+            );
+        }
+    }]);
+
+    return Repositories;
+}(_react2.default.Component);
+
+exports.default = Repositories;
 
 /***/ })
 /******/ ]);

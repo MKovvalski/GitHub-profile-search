@@ -2,6 +2,10 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import Sass from "./scss/main.scss";
 
+//imports
+import User from "./js/user.jsx";
+import Repositories from "./js/repositories.jsx";
+
 const promise = new Promise((resolve, reject) => {});
 
 class App extends React.Component {
@@ -10,7 +14,7 @@ class App extends React.Component {
         this.state = {
             userName: "",
             buttonState: true,
-            user: {},
+            user: "",
             arrayOfRepos: []
         }
     }
@@ -24,6 +28,7 @@ class App extends React.Component {
                 // create object with user data
                 const user = {
                     userName: userData.name === null ? "data not provided" : userData.name,
+                    avatar: userData.avatar_url === null ? "data not provided" : userData.avatar_url,
                     email: userData.email === null ? "data not provided" : userData.email,
                     company: userData.company === null ? "data not provided" : userData.company,
                     location: userData.location === null ? "data not provided" : userData.location,
@@ -33,8 +38,8 @@ class App extends React.Component {
                 // set user as state to display on website
                 this.setState({
                     user: user
-                })
-            })
+                });
+            });
       });
 
       // fetch user repositories
@@ -85,13 +90,32 @@ class App extends React.Component {
             })
     };
 
+    handleUserDataRender = () => {
+      if (this.state.user === "") {
+          return null
+      }  else {
+          return <User user = {this.state.user}/>
+      }
+    };
+
+    handleUserReposRender = () => {
+        if (this.state.arrayOfRepos === []) {
+            return null
+        }  else {
+            return <Repositories repos = {this.state.arrayOfRepos}/>
+        }
+    };
+
+
     render () {
-        return <div>
+        return <div className = "container">
             <form action="">
                 <label>Name</label>
                 <input type="text" name="name" value={this.state.userName} onChange={(e) => this.handleInputChange(e)}/>
             </form>
             <button onClick = {() => this.fetchData()} disabled= {this.state.buttonState}>fetch data</button>
+            {this.handleUserDataRender()}
+            {this.handleUserReposRender()}
         </div>
     }
 }
