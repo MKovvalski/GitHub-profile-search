@@ -1,0 +1,38 @@
+
+.main-user-data {
+  width: 30%;
+  min-width: 270px;
+  color: $color-font-text;
+}
+
+.user {
+  width: 100%;
+}
+
+.avatar-wrapper {
+  width: 270px;
+  height: 270px;
+  overflow: hidden;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.user-name {
+  margin-top: 5%;
+  font-size: 29px;
+  font-weight: 800;
+  color: black;
+}
+
+.user-login {
+  font-weight: 300;
+  font-size: 24px;
+}
+
+.user-bio {
+  font-size: 18px;
+  margin-top: 5%;
+  padding-bottom: 16px;
+  border-bottom: $border;
+}
+

@@ -4,6 +4,13 @@
 @import "./helpers/parameters.scss";
 @import "./helpers/mixins.scss";
 
+//components
+@import "./components/search-bar.scss";
+@import "./components/user.scss";
+@import "./components/repositories.scss";
+
+
 //pages
+@import "./pages/main-page.scss";
 
 //layouts

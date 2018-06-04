@@ -27,7 +27,8 @@ class App extends React.Component {
 
                 // create object with user data
                 const user = {
-                    userName: userData.name === null ? "data not provided" : userData.name,
+                    userName: userData.name === null ? "" : userData.name,
+                    userLogin: userData.login === null ? "" : userData.login,
                     avatar: userData.avatar_url === null ? "data not provided" : userData.avatar_url,
                     email: userData.email === null ? "data not provided" : userData.email,
                     company: userData.company === null ? "data not provided" : userData.company,
@@ -106,16 +107,15 @@ class App extends React.Component {
         }
     };
 
-
     render () {
         return <div className = "container">
-            <form action="">
-                <label>Name</label>
-                <input type="text" name="name" value={this.state.userName} onChange={(e) => this.handleInputChange(e)}/>
-            </form>
+            <label className = "">Name</label>
+            <input placeholder="input user's name" type="text" name="name" value={this.state.userName} onChange={(e) => this.handleInputChange(e)}/>
             <button onClick = {() => this.fetchData()} disabled= {this.state.buttonState}>fetch data</button>
-            {this.handleUserDataRender()}
-            {this.handleUserReposRender()}
+            <main className="main">
+                {this.handleUserDataRender()}
+                {this.handleUserReposRender()}
+            </main>
         </div>
     }
 }

@@ -11,15 +11,16 @@ class User extends React.Component {
     render () {
         const user = this.props.user;
         return <section className= "main-user-data">
-            <article>
-                <img src = {user.avatar} alt="user-avatar"/>
-                <div className = "user-data">
-                    <h2>{user.userName}</h2>
-                    <span>{user.email}</span>
-                    <span>{user.company}</span>
-                    <p>{user.bio}</p>
-                    <span>{user.location}</span>
+            <article className="user">
+                <div className="avatar-wrapper">
+                    <img src = {user.avatar} alt="user-avatar"/>
                 </div>
+                <h2 className="user-name">{user.userName}</h2>
+                <span className="user-login">{user.userLogin}</span>
+                <p className="user-bio">{user.bio}</p>
+                <span className="user-location">{user.location}</span>
+                <span className="user-email">{user.email}</span>
+                <span className="user-position">{user.company}</span>
             </article>
         </section>
     }

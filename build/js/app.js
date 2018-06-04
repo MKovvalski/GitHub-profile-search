@@ -258,6 +258,21 @@ process.umask = function() { return 0; };
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(13);
+} else {
+  module.exports = __webpack_require__(14);
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -314,7 +329,7 @@ module.exports = invariant;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -356,7 +371,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -453,7 +468,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -477,21 +492,6 @@ module.exports = emptyObject;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(13);
-} else {
-  module.exports = __webpack_require__(14);
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -506,7 +506,7 @@ if (process.env.NODE_ENV === 'production') {
 
 
 
-var emptyFunction = __webpack_require__(2);
+var emptyFunction = __webpack_require__(3);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -575,7 +575,7 @@ module.exports = warning;
 
 
 if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(1);
+  var invariant = __webpack_require__(2);
   var warning = __webpack_require__(6);
   var ReactPropTypesSecret = __webpack_require__(15);
   var loggedTypeFailures = {};
@@ -831,7 +831,7 @@ module.exports = containsNode;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(5);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -880,7 +880,8 @@ var App = function (_React$Component) {
 
                     // create object with user data
                     var user = {
-                        userName: userData.name === null ? "data not provided" : userData.name,
+                        userName: userData.name === null ? "" : userData.name,
+                        userLogin: userData.login === null ? "" : userData.login,
                         avatar: userData.avatar_url === null ? "data not provided" : userData.avatar_url,
                         email: userData.email === null ? "data not provided" : userData.email,
                         company: userData.company === null ? "data not provided" : userData.company,
@@ -977,17 +978,13 @@ var App = function (_React$Component) {
                 "div",
                 { className: "container" },
                 _react2.default.createElement(
-                    "form",
-                    { action: "" },
-                    _react2.default.createElement(
-                        "label",
-                        null,
-                        "Name"
-                    ),
-                    _react2.default.createElement("input", { type: "text", name: "name", value: this.state.userName, onChange: function onChange(e) {
-                            return _this2.handleInputChange(e);
-                        } })
+                    "label",
+                    { className: "" },
+                    "Name"
                 ),
+                _react2.default.createElement("input", { placeholder: "input user's name", type: "text", name: "name", value: this.state.userName, onChange: function onChange(e) {
+                        return _this2.handleInputChange(e);
+                    } }),
                 _react2.default.createElement(
                     "button",
                     { onClick: function onClick() {
@@ -995,8 +992,12 @@ var App = function (_React$Component) {
                         }, disabled: this.state.buttonState },
                     "fetch data"
                 ),
-                this.handleUserDataRender(),
-                this.handleUserReposRender()
+                _react2.default.createElement(
+                    "main",
+                    { className: "main" },
+                    this.handleUserDataRender(),
+                    this.handleUserReposRender()
+                )
             );
         }
     }]);
@@ -1022,7 +1023,7 @@ document.addEventListener("DOMContentLoaded", function () {
  * LICENSE file in the root directory of this source tree.
  */
 
-var m=__webpack_require__(3),n=__webpack_require__(1),p=__webpack_require__(4),q=__webpack_require__(2),r="function"===typeof Symbol&&Symbol["for"],t=r?Symbol["for"]("react.element"):60103,u=r?Symbol["for"]("react.portal"):60106,v=r?Symbol["for"]("react.fragment"):60107,w=r?Symbol["for"]("react.strict_mode"):60108,x=r?Symbol["for"]("react.provider"):60109,y=r?Symbol["for"]("react.context"):60110,z=r?Symbol["for"]("react.async_mode"):60111,A=r?Symbol["for"]("react.forward_ref"):
+var m=__webpack_require__(4),n=__webpack_require__(2),p=__webpack_require__(5),q=__webpack_require__(3),r="function"===typeof Symbol&&Symbol["for"],t=r?Symbol["for"]("react.element"):60103,u=r?Symbol["for"]("react.portal"):60106,v=r?Symbol["for"]("react.fragment"):60107,w=r?Symbol["for"]("react.strict_mode"):60108,x=r?Symbol["for"]("react.provider"):60109,y=r?Symbol["for"]("react.context"):60110,z=r?Symbol["for"]("react.async_mode"):60111,A=r?Symbol["for"]("react.forward_ref"):
 60112,B="function"===typeof Symbol&&Symbol.iterator;function C(a){for(var b=arguments.length-1,e="http://reactjs.org/docs/error-decoder.html?invariant\x3d"+a,c=0;c<b;c++)e+="\x26args[]\x3d"+encodeURIComponent(arguments[c+1]);n(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",e)}var D={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};
 function E(a,b,e){this.props=a;this.context=b;this.refs=p;this.updater=e||D}E.prototype.isReactComponent={};E.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?C("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};E.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};function F(){}F.prototype=E.prototype;function G(a,b,e){this.props=a;this.context=b;this.refs=p;this.updater=e||D}var H=G.prototype=new F;
 H.constructor=G;m(H,E.prototype);H.isPureReactComponent=!0;var I={current:null},J=Object.prototype.hasOwnProperty,K={key:!0,ref:!0,__self:!0,__source:!0};
@@ -1059,11 +1060,11 @@ if (process.env.NODE_ENV !== "production") {
   (function() {
 'use strict';
 
-var _assign = __webpack_require__(3);
-var invariant = __webpack_require__(1);
-var emptyObject = __webpack_require__(4);
+var _assign = __webpack_require__(4);
+var invariant = __webpack_require__(2);
+var emptyObject = __webpack_require__(5);
 var warning = __webpack_require__(6);
-var emptyFunction = __webpack_require__(2);
+var emptyFunction = __webpack_require__(3);
 var checkPropTypes = __webpack_require__(7);
 
 // TODO: this is special because it gets imported during build.
@@ -2541,7 +2542,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var ba=__webpack_require__(1),ea=__webpack_require__(5),m=__webpack_require__(8),A=__webpack_require__(3),C=__webpack_require__(2),fa=__webpack_require__(9),ha=__webpack_require__(10),ja=__webpack_require__(11),ka=__webpack_require__(4);
+var ba=__webpack_require__(2),ea=__webpack_require__(1),m=__webpack_require__(8),A=__webpack_require__(4),C=__webpack_require__(3),fa=__webpack_require__(9),ha=__webpack_require__(10),ja=__webpack_require__(11),ka=__webpack_require__(5);
 function D(a){for(var b=arguments.length-1,c="http://reactjs.org/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);ba(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",c)}ea?void 0:D("227");
 function ma(a,b,c,d,e,f,h,g,k){this._hasCaughtError=!1;this._caughtError=null;var v=Array.prototype.slice.call(arguments,3);try{b.apply(c,v)}catch(l){this._caughtError=l,this._hasCaughtError=!0}}
 var E={_caughtError:null,_hasCaughtError:!1,_rethrowError:null,_hasRethrowError:!1,invokeGuardedCallback:function(a,b,c,d,e,f,h,g,k){ma.apply(E,arguments)},invokeGuardedCallbackAndCatchFirstError:function(a,b,c,d,e,f,h,g,k){E.invokeGuardedCallback.apply(this,arguments);if(E.hasCaughtError()){var v=E.clearCaughtError();E._hasRethrowError||(E._hasRethrowError=!0,E._rethrowError=v)}},rethrowCaughtError:function(){return na.apply(E,arguments)},hasCaughtError:function(){return E._hasCaughtError},clearCaughtError:function(){if(E._hasCaughtError){var a=
@@ -2855,17 +2856,17 @@ if (process.env.NODE_ENV !== "production") {
   (function() {
 'use strict';
 
-var invariant = __webpack_require__(1);
-var React = __webpack_require__(5);
+var invariant = __webpack_require__(2);
+var React = __webpack_require__(1);
 var warning = __webpack_require__(6);
 var ExecutionEnvironment = __webpack_require__(8);
-var _assign = __webpack_require__(3);
-var emptyFunction = __webpack_require__(2);
+var _assign = __webpack_require__(4);
+var emptyFunction = __webpack_require__(3);
 var checkPropTypes = __webpack_require__(7);
 var getActiveElement = __webpack_require__(9);
 var shallowEqual = __webpack_require__(10);
 var containsNode = __webpack_require__(11);
-var emptyObject = __webpack_require__(4);
+var emptyObject = __webpack_require__(5);
 var hyphenateStyleName = __webpack_require__(21);
 var camelizeStyleName = __webpack_require__(23);
 
@@ -19691,7 +19692,7 @@ exports = module.exports = __webpack_require__(27)(false);
 
 
 // module
-exports.push([module.i, "/*stylelint-disable*/\n/*\n\tHTML5 Reset :: style.css\n\t----------------------------------------------------------\n\tWe have learned much from/been inspired by/taken code where offered from:\n\n\tEric Meyer\t\t\t\t\t:: http://meyerweb.com\n\tHTML5 Doctor\t\t\t\t:: http://html5doctor.com\n\tand the HTML5 Boilerplate\t:: http://html5boilerplate.com\n\n-------------------------------------------------------------------------------*/\n/* Let's default this puppy out\n-------------------------------------------------------------------------------*/\nhtml, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font-weight: normal;\n  vertical-align: baseline;\n  background: transparent; }\n\nmain, article, aside, figure, footer, header, nav, section, details, summary {\n  display: block; }\n\n/* Handle box-sizing while better addressing child elements:\n   http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */\nhtml {\n  box-sizing: border-box; }\n\n*,\n*:before,\n*:after {\n  box-sizing: inherit; }\n\n/* consider resetting the default cursor: https://gist.github.com/murtaugh/5247154 */\n/* Responsive images and other embedded objects */\n/* if you don't have full control over `img` tags (if you have to overcome attributes), consider adding height: auto */\nimg,\nobject,\nembed {\n  max-width: 100%; }\n\n/*\n   Note: keeping IMG here will cause problems if you're using foreground images as sprites.\n\tIn fact, it *will* cause problems with Google Maps' controls at small size.\n\tIf this is the case for you, try uncommenting the following:\n\n#map img {\n\t\tmax-width: none;\n}\n*/\n/* force a vertical scrollbar to prevent a jumpy page */\nhtml {\n  overflow-y: scroll; }\n\n/* we use a lot of ULs that aren't bulleted.\n\tyou'll have to restore the bullets within content,\n\twhich is fine because they're probably customized anyway */\nul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: '';\n  content: none; }\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\ndel {\n  text-decoration: line-through; }\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted #000;\n  cursor: help; }\n\n/* tables still need cellspacing=\"0\" in the markup */\ntable {\n  border-collapse: separate;\n  border-spacing: 0; }\n\nth {\n  font-weight: bold;\n  vertical-align: bottom; }\n\ntd {\n  font-weight: normal;\n  vertical-align: top; }\n\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #ccc;\n  margin: 1em 0;\n  padding: 0; }\n\ninput, select {\n  vertical-align: middle; }\n\npre {\n  white-space: pre;\n  /* CSS2 */\n  white-space: pre-wrap;\n  /* CSS 2.1 */\n  white-space: pre-line;\n  /* CSS 3 (and 2.1 as well, actually) */\n  word-wrap: break-word;\n  /* IE */ }\n\ninput[type=\"radio\"] {\n  vertical-align: text-bottom; }\n\ninput[type=\"checkbox\"] {\n  vertical-align: bottom; }\n\n.ie7 input[type=\"checkbox\"] {\n  vertical-align: baseline; }\n\n.ie6 input {\n  vertical-align: text-bottom; }\n\nselect, input, textarea {\n  font: 99% sans-serif; }\n\ntable {\n  font-size: inherit;\n  font: 100%; }\n\nsmall {\n  font-size: 85%; }\n\nstrong {\n  font-weight: bold; }\n\ntd, td img {\n  vertical-align: top; }\n\n/* Make sure sup and sub don't mess with your line-heights http://gist.github.com/413930 */\nsub, sup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative; }\n\nsup {\n  top: -0.5em; }\n\nsub {\n  bottom: -0.25em; }\n\n/* standardize any monospaced elements */\npre, code, kbd, samp {\n  font-family: monospace, sans-serif; }\n\n/* hand cursor on clickable elements */\n.clickable,\nlabel,\ninput[type=button],\ninput[type=submit],\ninput[type=file],\nbutton {\n  cursor: pointer; }\n\n/* Webkit browsers add a 2px margin outside the chrome of form elements */\nbutton, input, select, textarea {\n  margin: 0; }\n\n/* make buttons play nice in IE */\nbutton,\ninput[type=button] {\n  width: auto;\n  overflow: visible; }\n\n/* scale images in IE7 more attractively */\n.ie7 img {\n  -ms-interpolation-mode: bicubic; }\n\n/* prevent BG image flicker upon hover\n   (commented out as usage is rare, and the filter syntax messes with some pre-processors)\n.ie6 html {filter: expression(document.execCommand(\"BackgroundImageCache\", false, true));}\n*/\n/* let's clear some floats */\n.clearfix:after {\n  content: \" \";\n  display: block;\n  clear: both; }\n", ""]);
+exports.push([module.i, "/*stylelint-disable*/\n/*\n\tHTML5 Reset :: style.css\n\t----------------------------------------------------------\n\tWe have learned much from/been inspired by/taken code where offered from:\n\n\tEric Meyer\t\t\t\t\t:: http://meyerweb.com\n\tHTML5 Doctor\t\t\t\t:: http://html5doctor.com\n\tand the HTML5 Boilerplate\t:: http://html5boilerplate.com\n\n-------------------------------------------------------------------------------*/\n/* Let's default this puppy out\n-------------------------------------------------------------------------------*/\nhtml, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font-weight: normal;\n  vertical-align: baseline;\n  background: transparent; }\n\nmain, article, aside, figure, footer, header, nav, section, details, summary {\n  display: block; }\n\n/* Handle box-sizing while better addressing child elements:\n   http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */\nhtml {\n  box-sizing: border-box; }\n\n*,\n*:before,\n*:after {\n  box-sizing: inherit; }\n\n/* consider resetting the default cursor: https://gist.github.com/murtaugh/5247154 */\n/* Responsive images and other embedded objects */\n/* if you don't have full control over `img` tags (if you have to overcome attributes), consider adding height: auto */\nimg,\nobject,\nembed {\n  max-width: 100%; }\n\n/*\n   Note: keeping IMG here will cause problems if you're using foreground images as sprites.\n\tIn fact, it *will* cause problems with Google Maps' controls at small size.\n\tIf this is the case for you, try uncommenting the following:\n\n#map img {\n\t\tmax-width: none;\n}\n*/\n/* force a vertical scrollbar to prevent a jumpy page */\nhtml {\n  overflow-y: scroll; }\n\n/* we use a lot of ULs that aren't bulleted.\n\tyou'll have to restore the bullets within content,\n\twhich is fine because they're probably customized anyway */\nul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: '';\n  content: none; }\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\ndel {\n  text-decoration: line-through; }\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted #000;\n  cursor: help; }\n\n/* tables still need cellspacing=\"0\" in the markup */\ntable {\n  border-collapse: separate;\n  border-spacing: 0; }\n\nth {\n  font-weight: bold;\n  vertical-align: bottom; }\n\ntd {\n  font-weight: normal;\n  vertical-align: top; }\n\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #ccc;\n  margin: 1em 0;\n  padding: 0; }\n\ninput, select {\n  vertical-align: middle; }\n\npre {\n  white-space: pre;\n  /* CSS2 */\n  white-space: pre-wrap;\n  /* CSS 2.1 */\n  white-space: pre-line;\n  /* CSS 3 (and 2.1 as well, actually) */\n  word-wrap: break-word;\n  /* IE */ }\n\ninput[type=\"radio\"] {\n  vertical-align: text-bottom; }\n\ninput[type=\"checkbox\"] {\n  vertical-align: bottom; }\n\n.ie7 input[type=\"checkbox\"] {\n  vertical-align: baseline; }\n\n.ie6 input {\n  vertical-align: text-bottom; }\n\nselect, input, textarea {\n  font: 99% sans-serif; }\n\ntable {\n  font-size: inherit;\n  font: 100%; }\n\nsmall {\n  font-size: 85%; }\n\nstrong {\n  font-weight: bold; }\n\ntd, td img {\n  vertical-align: top; }\n\n/* Make sure sup and sub don't mess with your line-heights http://gist.github.com/413930 */\nsub, sup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative; }\n\nsup {\n  top: -0.5em; }\n\nsub {\n  bottom: -0.25em; }\n\n/* standardize any monospaced elements */\npre, code, kbd, samp {\n  font-family: monospace, sans-serif; }\n\n/* hand cursor on clickable elements */\n.clickable,\nlabel,\ninput[type=button],\ninput[type=submit],\ninput[type=file],\nbutton {\n  cursor: pointer; }\n\n/* Webkit browsers add a 2px margin outside the chrome of form elements */\nbutton, input, select, textarea {\n  margin: 0; }\n\n/* make buttons play nice in IE */\nbutton,\ninput[type=button] {\n  width: auto;\n  overflow: visible; }\n\n/* scale images in IE7 more attractively */\n.ie7 img {\n  -ms-interpolation-mode: bicubic; }\n\n/* prevent BG image flicker upon hover\n   (commented out as usage is rare, and the filter syntax messes with some pre-processors)\n.ie6 html {filter: expression(document.execCommand(\"BackgroundImageCache\", false, true));}\n*/\n/* let's clear some floats */\n.clearfix:after {\n  content: \" \";\n  display: block;\n  clear: both; }\n\n.main-user-data {\n  width: 30%;\n  min-width: 270px;\n  color: #7c7e83; }\n\n.user {\n  width: 100%; }\n\n.avatar-wrapper {\n  width: 270px;\n  height: 270px;\n  overflow: hidden;\n  border-radius: 10px;\n  object-fit: cover; }\n\n.user-name {\n  margin-top: 5%;\n  font-size: 29px;\n  font-weight: 800;\n  color: black; }\n\n.user-login {\n  font-weight: 300;\n  font-size: 24px; }\n\n.user-bio {\n  font-size: 18px;\n  margin-top: 5%;\n  padding-bottom: 16px;\n  border-bottom: 1px solid #d1d5da; }\n\n.main {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: center;\n  font-family: \"Open Sans\", sans-serif; }\n", ""]);
 
 // exports
 
@@ -20258,7 +20259,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(5);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -20291,36 +20292,41 @@ var User = function (_React$Component) {
                 { className: "main-user-data" },
                 _react2.default.createElement(
                     "article",
-                    null,
-                    _react2.default.createElement("img", { src: user.avatar, alt: "user-avatar" }),
+                    { className: "user" },
                     _react2.default.createElement(
                         "div",
-                        { className: "user-data" },
-                        _react2.default.createElement(
-                            "h2",
-                            null,
-                            user.userName
-                        ),
-                        _react2.default.createElement(
-                            "span",
-                            null,
-                            user.email
-                        ),
-                        _react2.default.createElement(
-                            "span",
-                            null,
-                            user.company
-                        ),
-                        _react2.default.createElement(
-                            "p",
-                            null,
-                            user.bio
-                        ),
-                        _react2.default.createElement(
-                            "span",
-                            null,
-                            user.location
-                        )
+                        { className: "avatar-wrapper" },
+                        _react2.default.createElement("img", { src: user.avatar, alt: "user-avatar" })
+                    ),
+                    _react2.default.createElement(
+                        "h2",
+                        { className: "user-name" },
+                        user.userName
+                    ),
+                    _react2.default.createElement(
+                        "span",
+                        { className: "user-login" },
+                        user.userLogin
+                    ),
+                    _react2.default.createElement(
+                        "p",
+                        { className: "user-bio" },
+                        user.bio
+                    ),
+                    _react2.default.createElement(
+                        "span",
+                        { className: "user-location" },
+                        user.location
+                    ),
+                    _react2.default.createElement(
+                        "span",
+                        { className: "user-email" },
+                        user.email
+                    ),
+                    _react2.default.createElement(
+                        "span",
+                        { className: "user-position" },
+                        user.company
                     )
                 )
             );
@@ -20345,7 +20351,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(5);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -20393,7 +20399,6 @@ var Repositories = function (_React$Component) {
     _createClass(Repositories, [{
         key: "render",
         value: function render() {
-            console.log(this.handleRepositoriesRender());
             return _react2.default.createElement(
                 "section",
                 null,

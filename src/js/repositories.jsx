@@ -18,7 +18,6 @@ class Repositories extends React.Component {
     };
 
     render () {
-        console.log(this.handleRepositoriesRender());
         return <section>
             <ul>
                 {this.handleRepositoriesRender()}

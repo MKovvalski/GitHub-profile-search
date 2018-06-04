@@ -1,0 +1,5 @@
+
+.main {
+  @include flex-box(row, center,center);
+  font-family: $Mono;
+}
