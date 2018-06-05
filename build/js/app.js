@@ -877,7 +877,6 @@ var App = function (_React$Component) {
             //  fetch user data
             fetch("https://api.github.com/users/" + _this.state.userName).then(function (resp) {
                 resp.json().then(function (userData) {
-
                     // create object with user data
                     var user = {
                         userName: userData.name === null ? "" : userData.name,
@@ -911,7 +910,14 @@ var App = function (_React$Component) {
                     // push six first repos to array
                     repos.map(function (repo) {
                         if (sortedRepos.length < 6) {
-                            sortedRepos.push(repo);
+                            var repoToPush = {
+                                name: repo.name,
+                                description: repo.description,
+                                language: repo.language
+                            };
+
+                            console.log(repoToPush);
+                            sortedRepos.push(repoToPush);
                         }
                     });
 
@@ -963,8 +969,20 @@ var App = function (_React$Component) {
         _this.state = {
             userName: "",
             buttonState: true,
-            user: "",
-            arrayOfRepos: []
+            user: {
+                avatar: "https://avatars0.githubusercontent.com/u/33545558?v=4",
+                bio: "Junior Front-End Dev from Warsaw looking for his first job in IT. ",
+                company: "data not provided",
+                email: "data not provided",
+                location: "Warsaw, Poland ",
+                userLogin: "MateuszKowalskiCL",
+                userName: "Mateusz"
+            },
+            arrayOfRepos: [{
+                description: "Project build in React with support of Redux. Game recreates turn based Pokemon Battles with precise damage calculations.",
+                name: "PokemonGame-simplified",
+                language: "javascript"
+            }]
         };
         return _this;
     }
@@ -19692,7 +19710,7 @@ exports = module.exports = __webpack_require__(27)(false);
 
 
 // module
-exports.push([module.i, "/*stylelint-disable*/\n/*\n\tHTML5 Reset :: style.css\n\t----------------------------------------------------------\n\tWe have learned much from/been inspired by/taken code where offered from:\n\n\tEric Meyer\t\t\t\t\t:: http://meyerweb.com\n\tHTML5 Doctor\t\t\t\t:: http://html5doctor.com\n\tand the HTML5 Boilerplate\t:: http://html5boilerplate.com\n\n-------------------------------------------------------------------------------*/\n/* Let's default this puppy out\n-------------------------------------------------------------------------------*/\nhtml, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font-weight: normal;\n  vertical-align: baseline;\n  background: transparent; }\n\nmain, article, aside, figure, footer, header, nav, section, details, summary {\n  display: block; }\n\n/* Handle box-sizing while better addressing child elements:\n   http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */\nhtml {\n  box-sizing: border-box; }\n\n*,\n*:before,\n*:after {\n  box-sizing: inherit; }\n\n/* consider resetting the default cursor: https://gist.github.com/murtaugh/5247154 */\n/* Responsive images and other embedded objects */\n/* if you don't have full control over `img` tags (if you have to overcome attributes), consider adding height: auto */\nimg,\nobject,\nembed {\n  max-width: 100%; }\n\n/*\n   Note: keeping IMG here will cause problems if you're using foreground images as sprites.\n\tIn fact, it *will* cause problems with Google Maps' controls at small size.\n\tIf this is the case for you, try uncommenting the following:\n\n#map img {\n\t\tmax-width: none;\n}\n*/\n/* force a vertical scrollbar to prevent a jumpy page */\nhtml {\n  overflow-y: scroll; }\n\n/* we use a lot of ULs that aren't bulleted.\n\tyou'll have to restore the bullets within content,\n\twhich is fine because they're probably customized anyway */\nul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: '';\n  content: none; }\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\ndel {\n  text-decoration: line-through; }\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted #000;\n  cursor: help; }\n\n/* tables still need cellspacing=\"0\" in the markup */\ntable {\n  border-collapse: separate;\n  border-spacing: 0; }\n\nth {\n  font-weight: bold;\n  vertical-align: bottom; }\n\ntd {\n  font-weight: normal;\n  vertical-align: top; }\n\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #ccc;\n  margin: 1em 0;\n  padding: 0; }\n\ninput, select {\n  vertical-align: middle; }\n\npre {\n  white-space: pre;\n  /* CSS2 */\n  white-space: pre-wrap;\n  /* CSS 2.1 */\n  white-space: pre-line;\n  /* CSS 3 (and 2.1 as well, actually) */\n  word-wrap: break-word;\n  /* IE */ }\n\ninput[type=\"radio\"] {\n  vertical-align: text-bottom; }\n\ninput[type=\"checkbox\"] {\n  vertical-align: bottom; }\n\n.ie7 input[type=\"checkbox\"] {\n  vertical-align: baseline; }\n\n.ie6 input {\n  vertical-align: text-bottom; }\n\nselect, input, textarea {\n  font: 99% sans-serif; }\n\ntable {\n  font-size: inherit;\n  font: 100%; }\n\nsmall {\n  font-size: 85%; }\n\nstrong {\n  font-weight: bold; }\n\ntd, td img {\n  vertical-align: top; }\n\n/* Make sure sup and sub don't mess with your line-heights http://gist.github.com/413930 */\nsub, sup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative; }\n\nsup {\n  top: -0.5em; }\n\nsub {\n  bottom: -0.25em; }\n\n/* standardize any monospaced elements */\npre, code, kbd, samp {\n  font-family: monospace, sans-serif; }\n\n/* hand cursor on clickable elements */\n.clickable,\nlabel,\ninput[type=button],\ninput[type=submit],\ninput[type=file],\nbutton {\n  cursor: pointer; }\n\n/* Webkit browsers add a 2px margin outside the chrome of form elements */\nbutton, input, select, textarea {\n  margin: 0; }\n\n/* make buttons play nice in IE */\nbutton,\ninput[type=button] {\n  width: auto;\n  overflow: visible; }\n\n/* scale images in IE7 more attractively */\n.ie7 img {\n  -ms-interpolation-mode: bicubic; }\n\n/* prevent BG image flicker upon hover\n   (commented out as usage is rare, and the filter syntax messes with some pre-processors)\n.ie6 html {filter: expression(document.execCommand(\"BackgroundImageCache\", false, true));}\n*/\n/* let's clear some floats */\n.clearfix:after {\n  content: \" \";\n  display: block;\n  clear: both; }\n\n.main-user-data {\n  width: 30%;\n  min-width: 270px;\n  color: #7c7e83; }\n\n.user {\n  width: 100%; }\n\n.avatar-wrapper {\n  width: 270px;\n  height: 270px;\n  overflow: hidden;\n  border-radius: 10px;\n  object-fit: cover; }\n\n.user-name {\n  margin-top: 5%;\n  font-size: 29px;\n  font-weight: 800;\n  color: black; }\n\n.user-login {\n  font-weight: 300;\n  font-size: 24px; }\n\n.user-bio {\n  font-size: 18px;\n  margin-top: 5%;\n  padding-bottom: 16px;\n  border-bottom: 1px solid #d1d5da; }\n\n.main {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: center;\n  font-family: \"Open Sans\", sans-serif; }\n", ""]);
+exports.push([module.i, "/*stylelint-disable*/\n/*\n\tHTML5 Reset :: style.css\n\t----------------------------------------------------------\n\tWe have learned much from/been inspired by/taken code where offered from:\n\n\tEric Meyer\t\t\t\t\t:: http://meyerweb.com\n\tHTML5 Doctor\t\t\t\t:: http://html5doctor.com\n\tand the HTML5 Boilerplate\t:: http://html5boilerplate.com\n\n-------------------------------------------------------------------------------*/\n/* Let's default this puppy out\n-------------------------------------------------------------------------------*/\nhtml, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font-weight: normal;\n  vertical-align: baseline;\n  background: transparent; }\n\nmain, article, aside, figure, footer, header, nav, section, details, summary {\n  display: block; }\n\n/* Handle box-sizing while better addressing child elements:\n   http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */\nhtml {\n  box-sizing: border-box; }\n\n*,\n*:before,\n*:after {\n  box-sizing: inherit; }\n\n/* consider resetting the default cursor: https://gist.github.com/murtaugh/5247154 */\n/* Responsive images and other embedded objects */\n/* if you don't have full control over `img` tags (if you have to overcome attributes), consider adding height: auto */\nimg,\nobject,\nembed {\n  max-width: 100%; }\n\n/*\n   Note: keeping IMG here will cause problems if you're using foreground images as sprites.\n\tIn fact, it *will* cause problems with Google Maps' controls at small size.\n\tIf this is the case for you, try uncommenting the following:\n\n#map img {\n\t\tmax-width: none;\n}\n*/\n/* force a vertical scrollbar to prevent a jumpy page */\nhtml {\n  overflow-y: scroll; }\n\n/* we use a lot of ULs that aren't bulleted.\n\tyou'll have to restore the bullets within content,\n\twhich is fine because they're probably customized anyway */\nul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: '';\n  content: none; }\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\ndel {\n  text-decoration: line-through; }\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted #000;\n  cursor: help; }\n\n/* tables still need cellspacing=\"0\" in the markup */\ntable {\n  border-collapse: separate;\n  border-spacing: 0; }\n\nth {\n  font-weight: bold;\n  vertical-align: bottom; }\n\ntd {\n  font-weight: normal;\n  vertical-align: top; }\n\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #ccc;\n  margin: 1em 0;\n  padding: 0; }\n\ninput, select {\n  vertical-align: middle; }\n\npre {\n  white-space: pre;\n  /* CSS2 */\n  white-space: pre-wrap;\n  /* CSS 2.1 */\n  white-space: pre-line;\n  /* CSS 3 (and 2.1 as well, actually) */\n  word-wrap: break-word;\n  /* IE */ }\n\ninput[type=\"radio\"] {\n  vertical-align: text-bottom; }\n\ninput[type=\"checkbox\"] {\n  vertical-align: bottom; }\n\n.ie7 input[type=\"checkbox\"] {\n  vertical-align: baseline; }\n\n.ie6 input {\n  vertical-align: text-bottom; }\n\nselect, input, textarea {\n  font: 99% sans-serif; }\n\ntable {\n  font-size: inherit;\n  font: 100%; }\n\nsmall {\n  font-size: 85%; }\n\nstrong {\n  font-weight: bold; }\n\ntd, td img {\n  vertical-align: top; }\n\n/* Make sure sup and sub don't mess with your line-heights http://gist.github.com/413930 */\nsub, sup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative; }\n\nsup {\n  top: -0.5em; }\n\nsub {\n  bottom: -0.25em; }\n\n/* standardize any monospaced elements */\npre, code, kbd, samp {\n  font-family: monospace, sans-serif; }\n\n/* hand cursor on clickable elements */\n.clickable,\nlabel,\ninput[type=button],\ninput[type=submit],\ninput[type=file],\nbutton {\n  cursor: pointer; }\n\n/* Webkit browsers add a 2px margin outside the chrome of form elements */\nbutton, input, select, textarea {\n  margin: 0; }\n\n/* make buttons play nice in IE */\nbutton,\ninput[type=button] {\n  width: auto;\n  overflow: visible; }\n\n/* scale images in IE7 more attractively */\n.ie7 img {\n  -ms-interpolation-mode: bicubic; }\n\n/* prevent BG image flicker upon hover\n   (commented out as usage is rare, and the filter syntax messes with some pre-processors)\n.ie6 html {filter: expression(document.execCommand(\"BackgroundImageCache\", false, true));}\n*/\n/* let's clear some floats */\n.clearfix:after {\n  content: \" \";\n  display: block;\n  clear: both; }\n\n.main-user-data {\n  width: 270px;\n  color: #586075; }\n\n.user {\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: flex-start; }\n\n.avatar-wrapper {\n  width: 270px;\n  height: 270px;\n  overflow: hidden;\n  border-radius: 10px;\n  object-fit: cover; }\n\n.user-name {\n  margin-top: 5%;\n  font-size: 29px;\n  font-weight: 800;\n  color: black; }\n\n.user-login {\n  font-weight: 300;\n  font-size: 24px; }\n\n.user-bio {\n  font-size: 16px;\n  margin-top: 5%;\n  padding-bottom: 16px;\n  border-bottom: 1px solid #d1d5da; }\n\n.user-location {\n  color: black;\n  margin-top: 5%;\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: center; }\n\n.user-email {\n  color: blue;\n  width: 100%;\n  display: flex;\n  flex-direction: row;\n  justify-content: flex-start;\n  align-items: center;\n  padding-bottom: 16px;\n  border-bottom: 1px solid #d1d5da; }\n\n.icon {\n  margin-right: 5px;\n  width: 20px;\n  height: 20px; }\n\n.user-organisation {\n  font-size: 17px;\n  margin-top: 5%;\n  font-weight: 700;\n  color: black; }\n\n.main-repositories {\n  margin-left: 10px; }\n\n.title-repositories {\n  font-size: 19px;\n  font-weight: 700;\n  color: black;\n  margin-left: 5px; }\n\n.list-repositories {\n  width: 800px;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  align-items: center;\n  flex-wrap: wrap; }\n\n.list-element-repository {\n  width: 390px;\n  height: 180px;\n  border: 1px solid #d1d5da;\n  border-radius: 5px;\n  padding: 10px;\n  margin-bottom: 8px; }\n\n.title-repository {\n  color: blue;\n  font-size: 17px;\n  font-weight: 600;\n  margin-bottom: 10px; }\n\n.description-repository {\n  font-size: 14px;\n  color: #586075; }\n\n.language-repository {\n  display: flex;\n  align-items: center;\n  color: #586075; }\n\n.yellow-circle {\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  background-color: #ffcc00; }\n\n.red-circle {\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  background-color: #b32d00; }\n\n.violet-circle {\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  background-color: #4d0099; }\n\n.grey-circle {\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  background-color: grey; }\n\n.main {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: flex-start;\n  font-family: \"Open Sans\", sans-serif; }\n\n.visuallyhidden {\n  position: absolute;\n  overflow: hidden;\n  clip: rect(0 0 0 0);\n  height: 1px;\n  width: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0; }\n", ""]);
 
 // exports
 
@@ -20314,14 +20332,21 @@ var User = function (_React$Component) {
                         user.bio
                     ),
                     _react2.default.createElement(
-                        "span",
+                        "div",
                         { className: "user-location" },
+                        _react2.default.createElement("img", { className: "icon", src: "assests/icons/placeholder.svg", alt: "placeholder" }),
                         user.location
                     ),
                     _react2.default.createElement(
-                        "span",
+                        "div",
                         { className: "user-email" },
+                        _react2.default.createElement("img", { className: "icon", src: "assests/icons/message.svg", alt: "message" }),
                         user.email
+                    ),
+                    _react2.default.createElement(
+                        "span",
+                        { className: "user-organisation" },
+                        "Organizations"
                     ),
                     _react2.default.createElement(
                         "span",
@@ -20373,20 +20398,47 @@ var Repositories = function (_React$Component) {
 
         _this.handleRepositoriesRender = function () {
             return _this.props.repos.map(function (repo, index) {
+                var colorToDisplay = "";
+                switch (repo.language) {
+                    case "JavaScript":
+                        colorToDisplay = "yellow-circle";
+                        break;
+                    case "html":
+                        colorToDisplay = "red-circle";
+                        break;
+                    case "CSS":
+                        colorToDisplay = "violet-circle";
+                        break;
+                    default:
+                        colorToDisplay = "grey-circle";
+                }
                 return _react2.default.createElement(
                     "li",
-                    { key: index },
+                    { className: "list-element-repository", key: index },
                     _react2.default.createElement(
-                        "h2",
-                        null,
-                        " Name: ",
+                        "h3",
+                        { className: "title-repository" },
                         repo.name
                     ),
                     _react2.default.createElement(
                         "p",
-                        null,
+                        { className: "description-repository" },
                         "Description: ",
                         repo.description
+                    ),
+                    _react2.default.createElement(
+                        "div",
+                        { className: "language-repository" },
+                        _react2.default.createElement(
+                            "div",
+                            { className: colorToDisplay },
+                            _react2.default.createElement(
+                                "span",
+                                { className: "visuallyhidden" },
+                                "language circle"
+                            )
+                        ),
+                        repo.language
                     )
                 );
             });
@@ -20401,10 +20453,15 @@ var Repositories = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 "section",
-                null,
+                { className: "main-repositories" },
+                _react2.default.createElement(
+                    "h2",
+                    { className: "title-repositories" },
+                    "Repositories"
+                ),
                 _react2.default.createElement(
                     "ul",
-                    null,
+                    { className: "list-repositories" },
                     this.handleRepositoriesRender()
                 )
             );

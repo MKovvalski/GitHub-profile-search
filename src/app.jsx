@@ -14,8 +14,29 @@ class App extends React.Component {
         this.state = {
             userName: "",
             buttonState: true,
-            user: "",
-            arrayOfRepos: []
+            user: {
+                avatar:
+                    "https://avatars0.githubusercontent.com/u/33545558?v=4",
+                bio:
+                    "Junior Front-End Dev from Warsaw looking for his first job in IT. ",
+                company:
+                    "data not provided",
+                email:
+                    "data not provided",
+                location:
+                    "Warsaw, Poland ",
+                userLogin:
+                    "MateuszKowalskiCL",
+                userName:
+                    "Mateusz"
+            },
+            arrayOfRepos: [
+                {
+                    description: "Project build in React with support of Redux. Game recreates turn based Pokemon Battles with precise damage calculations.",
+                    name: "PokemonGame-simplified",
+                    language: "javascript"
+                }
+            ]
         }
     }
 
@@ -24,7 +45,6 @@ class App extends React.Component {
       //  fetch user data
       fetch("https://api.github.com/users/" + this.state.userName).then(resp => {
         resp.json().then( userData => {
-
                 // create object with user data
                 const user = {
                     userName: userData.name === null ? "" : userData.name,
@@ -58,7 +78,14 @@ class App extends React.Component {
               // push six first repos to array
               repos.map( (repo) => {
                  if (sortedRepos.length < 6) {
-                     sortedRepos.push(repo);
+                     const repoToPush = {
+                         name: repo.name,
+                         description: repo.description,
+                         language: repo.language
+                     };
+
+                     console.log(repoToPush);
+                     sortedRepos.push(repoToPush);
                  }
               });
 

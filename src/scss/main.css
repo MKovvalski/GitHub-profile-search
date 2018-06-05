@@ -196,12 +196,15 @@ input[type=button] {
   clear: both; }
 
 .main-user-data {
-  width: 30%;
-  min-width: 270px;
-  color: #7c7e83; }
+  width: 270px;
+  color: #586075; }
 
 .user {
-  width: 100%; }
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start; }
 
 .avatar-wrapper {
   width: 270px;
@@ -221,16 +224,119 @@ input[type=button] {
   font-size: 24px; }
 
 .user-bio {
-  font-size: 18px;
+  font-size: 16px;
   margin-top: 5%;
   padding-bottom: 16px;
   border-bottom: 1px solid #d1d5da; }
+
+.user-location {
+  color: black;
+  margin-top: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; }
+
+.user-email {
+  color: blue;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #d1d5da; }
+
+.icon {
+  margin-right: 5px;
+  width: 20px;
+  height: 20px; }
+
+.user-organisation {
+  font-size: 17px;
+  margin-top: 5%;
+  font-weight: 700;
+  color: black; }
+
+.main-repositories {
+  margin-left: 10px; }
+
+.title-repositories {
+  font-size: 19px;
+  font-weight: 700;
+  color: black;
+  margin-left: 5px; }
+
+.list-repositories {
+  width: 800px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap; }
+
+.list-element-repository {
+  width: 390px;
+  height: 180px;
+  border: 1px solid #d1d5da;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 8px; }
+
+.title-repository {
+  color: blue;
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 10px; }
+
+.description-repository {
+  font-size: 14px;
+  color: #586075; }
+
+.language-repository {
+  display: flex;
+  align-items: center;
+  color: #586075; }
+
+.yellow-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ffcc00; }
+
+.red-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #b32d00; }
+
+.violet-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #4d0099; }
+
+.grey-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: grey; }
 
 .main {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   font-family: "Open Sans", sans-serif; }
+
+.visuallyhidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0; }
 
 /*# sourceMappingURL=main.css.map */

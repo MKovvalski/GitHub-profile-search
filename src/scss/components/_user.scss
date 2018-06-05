@@ -1,12 +1,12 @@
 
 .main-user-data {
-  width: 30%;
-  min-width: 270px;
-  color: $color-font-text;
+  width: 270px;
+  color: $color-font-title;
 }
 
 .user {
   width: 100%;
+  @include flex-box(column, flex-start, flex-start);
 }
 
 .avatar-wrapper {
@@ -30,9 +30,37 @@
 }
 
 .user-bio {
-  font-size: 18px;
+  font-size: 16px;
   margin-top: 5%;
   padding-bottom: 16px;
   border-bottom: $border;
+}
+
+.user-location {
+  color: black;
+  margin-top: 5%;
+  @include flex-box(row, center ,center);
+}
+
+.user-email {
+  color: blue;
+  width: 100%;
+  @include flex-box(row, flex-start ,center);
+  padding-bottom: 16px;
+  border-bottom: $border;
+}
+
+.icon {
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+}
+
+.user-organisation {
+  font-size: 17px;
+  margin-top: 5%;
+  font-weight: 700;
+  color: black;
+
 }
 

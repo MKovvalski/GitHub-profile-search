@@ -1,0 +1,71 @@
+
+.main-repositories {
+  margin-left: 10px;
+}
+.title-repositories {
+  font-size: 19px;
+  font-weight: 700;
+  color: black;
+  margin-left: 5px;
+}
+
+.list-repositories {
+  width: 800px;
+  @include flex-box(row, space-around, center);
+  flex-wrap: wrap;
+}
+
+.list-element-repository {
+  width: 390px;
+  height: 180px;
+  border: $border;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 8px;
+}
+
+.title-repository {
+  color: blue;
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.description-repository {
+  font-size: 14px;
+  color: $color-font-title;
+}
+
+.language-repository {
+  display: flex;
+  align-items: center;
+  color: $color-font-title;
+}
+
+.yellow-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ffcc00;
+}
+
+.red-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #b32d00;
+}
+
+.violet-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #4d0099;
+}
+
+.grey-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: grey;
+}

@@ -18,8 +18,9 @@ class User extends React.Component {
                 <h2 className="user-name">{user.userName}</h2>
                 <span className="user-login">{user.userLogin}</span>
                 <p className="user-bio">{user.bio}</p>
-                <span className="user-location">{user.location}</span>
-                <span className="user-email">{user.email}</span>
+                <div className="user-location"><img className="icon" src="assests/icons/placeholder.svg" alt="placeholder"/>{user.location}</div>
+                <div className="user-email"><img className="icon" src="assests/icons/message.svg" alt="message"/>{user.email}</div>
+                <span className="user-organisation">Organizations</span>
                 <span className="user-position">{user.company}</span>
             </article>
         </section>
